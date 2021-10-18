@@ -10,17 +10,42 @@
 <body>
     <header>
         <div id="baner1">
-            <h2>MÓJ KALENDARZ</h2>
+            <img src="logo1.png" alt="Mój kalendarz">
         </div>
-        <div id="banner2">
-        <form action="kalendarz.php" method="POST">
+        <div id="baner2">
+            <h1>KALENDARZ</h1>
+            <?php
+            //script1
+            ?>
+        </form>
         </div>
     </header>
     <main>
-
+    <?php
+            //script2
+    $sql = 'SELECT miesiac, rok FROM zadania WHERE dataZadania = 2020-07-01';
+    $db = new mysqli('localhost', 'root', '', 'egzamin5');
+    $result = $db->query($sql);
+    while($row = $result->fetch_assoc()){
+        $data = $row['dataZadanie'];
+        $miesiac = $row['miesiac'];
+        $wpis = $row['wpis'];
+        echo '<div>';
+        echo "<h6>$data, $miesiac</h6>";
+        echo "<p>$wpis</p>";
+        echo '</div>';
+    }
+    ?>
     </main>
     <footer>
-
+    <div id="footer1">
+        <form action="kalendarz.php" method="POST">
+            <label  for="wpisID">dodaj wpis</label>
+            <input  type="text" id="wpisID">
+            <input type="submit" value="DODAJ" >
+        </form>
+    </div>
+    <p>Stronę wykonał:00000000000</p>
     </footer>
 </body>
 </html>
