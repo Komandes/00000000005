@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Mój kalendarz</title>
     <link rel="stylesheet" href="styl5.css">
 </head>
 <body>
@@ -14,28 +14,36 @@
         </div>
         <div id="baner2">
             <h1>KALENDARZ</h1>
-            <?php
-            //script1
-            ?>
+<?php
+
+           $sql = "SELECT `miesiac`, `rok` FROM `zadania` WHERE `dataZadania` = '2020-07-01' ";
+          
+           $db = new mysqli('localhost', 'root', '', 'egzamin5');
+           $result = $db->query($sql);
+           $row = $result->fetch_assoc();
+           $miesiac = $row['miesiac'];
+           $rok = $row['rok'];
+           echo "<h1>miesiac: $miesiac, rok: $rok</h1>";
+           $db->close();
+?>
         </form>
         </div>
     </header>
     <main>
-    <?php
+<?php
             //script2
-    $sql = 'SELECT miesiac, rok FROM zadania WHERE dataZadania = 2020-07-01';
+    $sql = 'SELECT `dataZadania`, `wpis` FROM `zadania` WHERE `miesiac` = "lipiec"';   
     $db = new mysqli('localhost', 'root', '', 'egzamin5');
     $result = $db->query($sql);
-    while($row = $result->fetch_assoc()){
-        $data = $row['dataZadanie'];
-        $miesiac = $row['miesiac'];
-        $wpis = $row['wpis'];
-        echo '<div>';
-        echo "<h6>$data, $miesiac</h6>";
-        echo "<p>$wpis</p>";
-        echo '</div>';
+        while($row = $result->fetch_assoc()){
+            $data = $row['dataZadania'];
+            $wpis = $row['wpis'];
+            echo '<div>';
+            echo "<h5>$data</h5>";
+            echo "<p>$wpis</p>";
+            echo '</div>';
     }
-    ?>
+?>
     </main>
     <footer>
     <div id="footer1">
